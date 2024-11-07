@@ -3,15 +3,15 @@ import java.util.ArrayList;
 public abstract class Course implements Subject {
    private String nameOfCourse;
    private int idOfCourse;
-   private Lecturer lecturer;
+   private User lecturer;
    private int capacity;
    private ArrayList<Student> studentsInTheCourse;
    private ArrayList<Observer> TheCourseObservers;
-    Course(String nameOfCourse, int idOfCourse, Lecturer lecturer)
+    Course(String nameOfCourse, int idOfCourse, User lecturer)
     {
         this.nameOfCourse=nameOfCourse;
         this.idOfCourse=idOfCourse;
-        this.lecturer=lecturer;
+        this.lecturer= lecturer;
         studentsInTheCourse=new ArrayList<>();
         TheCourseObservers=new ArrayList<>();
     }
@@ -32,7 +32,12 @@ public abstract class Course implements Subject {
             student.addCourse(this);
         }
         else{
-            System.out.println("Course is full");
+            try {
+                throw new Exception("Course is full");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+          //  System.out.println("Course is full");
         }
     }
     public void unregisterCourse(Student student){

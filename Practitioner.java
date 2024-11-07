@@ -1,6 +1,6 @@
-public class Practitioner extends User {
-    public Practitioner(String name, int id, String email) {
-        super(name, id, email);
+public class Practitioner extends Teacher {
+    public Practitioner(String name, int id, String password,String email) {
+        super(name, id, password,email);
     }
 }
 

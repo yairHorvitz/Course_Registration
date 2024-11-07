@@ -5,13 +5,17 @@ public abstract class User {
     private int id;
     private boolean isOnline;
     private String email;
+    private String password;
     ArrayList<Course> courses;
-    protected User(String name, int id, String email) {
+    protected User(String name, int id, String password, String email) {
         this.name = name;
         this.id = id;
         this.email = email;
+        this.password = password;
         courses = new ArrayList<>();
         isOnline = false;
+
+
     }
 
     public boolean getOnline() {
@@ -19,6 +23,10 @@ public abstract class User {
     }
     public void setOnline(boolean online) {
         isOnline = online;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getName() {
@@ -32,6 +40,7 @@ public abstract class User {
     public String getEmail() {
         return email;
     }
+
 
     public ArrayList<Course> getCourses() {
         return courses;

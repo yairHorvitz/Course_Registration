@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class RegistrationSystem implements FacadeStudentRegister {
+public class RegistrationSystem  {
     private static RegistrationSystem instance;
     private ArrayList<Course> courses;
-    private ArrayList<User> users;// check if it is necessary!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private ArrayList<User> users;
     private int capacity;
     ArrayList<User> onLineCounter;
 
@@ -21,9 +21,9 @@ public class RegistrationSystem implements FacadeStudentRegister {
         return instance;
     }
 
-    public void addNewCourse(String type, String nameOfCourse, int idOfCourse, Lecturer lecturer)throws IllegalArgumentException {
+    public void addNewCourse(String type, String nameOfCourse, int idOfCourse, Teacher lecturer)throws IllegalArgumentException {
         if (!lecturer.getOnline()) {
-            throw new IllegalArgumentException("Lecturer is not online");
+            throw new IllegalArgumentException("Teacher is not online");
         }
         if (type == null) {
             throw new IllegalArgumentException(" this type of course is not available");
@@ -39,10 +39,11 @@ public class RegistrationSystem implements FacadeStudentRegister {
             courses.add(newCourse);
         }
     }
+
     public Course getCourse(int idOfCourse) {
         boolean courseExists = false;
-        // Check if a course with the same ID already exists
-        for (Course course : courses) {//is it good fly weight pattern!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        for (Course course : courses) {
             if (course.getIdOfCourse() == idOfCourse) {
                 courseExists = true;
                 return course;
@@ -62,7 +63,7 @@ public class RegistrationSystem implements FacadeStudentRegister {
         }
 
 
-    public void removeCourse(int idOfCourse/*Course course that will be removed*/) {
+    public void removeCourse(int idOfCourse) {
         Course course = getCourse(idOfCourse);
             if (course!= null) {
                 courses.remove(course);
@@ -70,7 +71,7 @@ public class RegistrationSystem implements FacadeStudentRegister {
         }
 
 
-    @Override
+  //  @Override
     public void registerToTheCourse(int idOfCourse, Student student) {
         if (!student.getOnline()) {
             throw new IllegalArgumentException("Student is not online");
@@ -82,7 +83,7 @@ public class RegistrationSystem implements FacadeStudentRegister {
         course.registerCourse(student);
     }
 
-    @Override
+  //  @Override
     public void unregisterCourse(int courseId, Student student) {
         Course course = getCourse(courseId);
         if (course != null) {
@@ -90,9 +91,9 @@ public class RegistrationSystem implements FacadeStudentRegister {
         }
     }
 
-    @Override
+   // @Override
     public void registerToObserver(int courseId, Student student) {
-        if(!student.getOnline()){throw new IllegalArgumentException("Student is not online");}//check if student is online
+        if(!student.getOnline()){throw new IllegalArgumentException("Student is not online");}//be sure that the student is online
         Course course = getCourse(courseId);
         if (course != null) {
             course.registerToObserver(student);
@@ -100,17 +101,19 @@ public class RegistrationSystem implements FacadeStudentRegister {
 
     }
 
-    @Override
+  //  @Override
     public void unregisterToObserver(int courseId, Student student) {
-        if(!student.getOnline()){throw new IllegalArgumentException("Student is not online");}//check if student is online
+        if(!student.getOnline()){throw new IllegalArgumentException("Student is not online");}
         Course course = getCourse(courseId);
         if (course != null) {
             course.unregisterObserver(student);
         }
     }
 
-    @Override
-    public void loginToTheSystem(User user) {
+   // @Override
+    public void loginToTheSystem(User user,String password) {
+        if(!password.equals(user.getPassword())) {
+            throw new IllegalArgumentException("Wrong password");}
         if (onLineCounter.size() <= capacity) {
             if (!user.getOnline()) {
                 user.setOnline(true);
@@ -123,7 +126,7 @@ public class RegistrationSystem implements FacadeStudentRegister {
 
     }
 
-    @Override
+   // @Override
     public void logoutFromTheSystem(User user) {
         if (user.getOnline()) {
             user.setOnline(false);

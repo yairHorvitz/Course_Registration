@@ -1,5 +1,5 @@
 public class CourseFactory {
-    public static Course createCourse(String courseType, String name, int idOfCourse, Lecturer lecturer) {
+    public static Course createCourse(String courseType, String name, int idOfCourse, Teacher lecturer) {
 
         switch (courseType) {
             case "CompulsoryCourse" -> {

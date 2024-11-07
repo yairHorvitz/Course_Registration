@@ -21,8 +21,8 @@ public class SystemFacade implements FacadeStudentRegister{
     }
 
     @Override
-    public void loginToTheSystem(User user) {
-        RegistrationSystem.getRegistrationSystem().loginToTheSystem(user);
+    public void loginToTheSystem(User user,String password){
+        RegistrationSystem.getRegistrationSystem().loginToTheSystem(user,password);
     }
 
     @Override
@@ -31,8 +31,9 @@ public class SystemFacade implements FacadeStudentRegister{
     }
 
     @Override
-    public void addNewCourse(String type, String nameOfCourse, int idOfCourse, Lecturer lecturer) {
-        RegistrationSystem.getRegistrationSystem().addNewCourse(type, nameOfCourse, idOfCourse, lecturer);
+    public void addNewCourse(String type, String nameOfCourse, int idOfCourse, Teacher teacher) {
+
+        RegistrationSystem.getRegistrationSystem().addNewCourse(type, nameOfCourse, idOfCourse, teacher);
     }
 
     @Override
